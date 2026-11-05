@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redes de Datos - Instalación y Normas de Ponchado</title>
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-light: #e0f2fe;
+            --primary-dark: #0369a1;
+            --secondary: #0ea5e9;
+            --bg-light: #f8fafc;
+            --surface: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --border-color: #bae6fd;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --warning-bg: #fffbeb;
+            --warning-border: #f59e0b;
+            --warning-text: #78350f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header de la sección */
+        .section-header {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .section-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Botones de Navegación */
+        nav {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            padding: 12px 24px;
+            background-color: var(--surface);
+            color: var(--text-dark);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Contenedores y Cards */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid var(--primary);
+        }
+
+        .card h2 {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* Grid de Sub-Tarjetas */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .sub-card {
+            background: #f0f9ff;
+            border-radius: var(--radius);
+            padding: 18px;
+            border: 1px solid var(--border-color);
+        }
+
+        .sub-card h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        /* Cuadro de Advertencia/Nota */
+        .alert-box {
+            background-color: var(--warning-bg);
+            border-left: 5px solid var(--warning-border);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 18px 0;
+            color: var(--warning-text);
+            font-size: 0.95rem;
+        }
+
+        /* Tablas para normas de ponchado y características */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+
+        /* Indicadores visuales de color de los cables UTP */
+        .color-dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .bv { background: linear-gradient(135deg, #22c55e 50%, #ffffff 50%); border: 1px solid #94a3b8; }
+        .v { background: #22c55e; }
+        .bn { background: linear-gradient(135deg, #f97316 50%, #ffffff 50%); border: 1px solid #94a3b8; }
+        .n { background: #f97316; }
+        .ba { background: linear-gradient(135deg, #3b82f6 50%, #ffffff 50%); border: 1px solid #94a3b8; }
+        .a { background: #3b82f6; }
+        .bc { background: linear-gradient(135deg, #78350f 50%, #ffffff 50%); border: 1px solid #94a3b8; }
+        .c { background: #78350f; }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Encabezado de la Sección -->
+    <header class="section-header">
+        <h1>Redes de Datos I</h1>
+        <p>Módulo de Instalación, Administración de Redes Pequeñas y Normas de Ponchado</p>
+    </header>
+
+    <!-- Navegación entre Archivos -->
+    <nav>
+        <a href="informe.html" class="nav-btn">Informe General</a>
+        <a href="inicio.html" class="nav-btn active">Redes y Ponchado</a>
+    </nav>
+
+    <!-- 1. Instalación y Administración -->
+    <section class="card">
+        <span class="badge">Unidad 6</span>
+        <h2>Instalación y Administración de Redes Pequeñas</h2>
+        <p>Debemos tener en cuenta la estructura y ubicación de los equipos dentro de un ambiente laboral para realizar un diseño óptimo.</p>
+        
+        <div class="grid-2">
+            <div class="sub-card">
+                <h3>Red Cableada vs. Inalámbrica</h3>
+                <ul>
+                    <li><strong>Red Cableada:</strong> Puede superar fácilmente los 100 Mbps y llegar hasta 1 Gbps de transmisión estable.</li>
+                    <li><strong>Red Wi-Fi:</strong> Presenta una velocidad máxima de transmisión cercana a los 108 Mbps y depende del entorno.</li>
+                </ul>
+            </div>
+            <div class="sub-card">
+                <h3>Red Tipo "Estrella"</h3>
+                <p>Teniendo en cuenta que vamos a conectar <strong>no más de 8 equipos</strong> a la red, la mejor opción topológica es armar una red de tipo estrella con un concentrador central.</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 25px; color: var(--primary-dark);">Pasos para Instalar la Red Pequeña</h3>
+        <ul>
+            <li><strong>Instalación Eléctrica:</strong> Es muy importante que el espacio donde se monte la red tenga una instalación eléctrica en óptimas condiciones.</li>
+            <li><strong>Cálculo de Distancias:</strong> Una vez definido por dónde tender los cables de red, debemos calcular los metros necesarios.</li>
+            <li><strong>Bosquejo y Canalización:</strong> Realizar un bosquejo del recorrido que seguirán los cables y pasarlos utilizando un cablecanal.</li>
+        </ul>
+
+        <div class="alert-box">
+            <strong>⚠️ Nota Importante:</strong> El cable de red no puede doblarse a más de 45°, ya que podría generarse un cortocircuito o la rotura interna de los hilos de cobre.
+        </div>
+
+        <ul>
+            <li><strong>Conexionado y Rosetas:</strong> Pasar el cable por el cablecanal y, con la ayuda de una pinza crimpeadora (o de impacto), armar las fichas terminales y las rosetas con conectores RJ-45 hembra en cada puesto de trabajo.</li>
+            <li><strong>Montaje y Verificación:</strong> Amurar el concentrador a la pared y conectar cada roseta a él. Con las fichas armadas, se procede a verificar que no existan cables mal armados ni cortados mediante un <strong>LAN Tester</strong> (probador de red).</li>
+        </ul>
+    </section>
+
+    <!-- 2. Parámetros de Configuración y Equipos -->
+    <section class="card">
+        <span class="badge">Unidad 7</span>
+        <h2>Parámetros de Configuración y Elementos de Red</h2>
+        
+        <p>Con la red físicamente armada, se conectan las computadoras instalando previamente las interfaces de red en caso de no contar con una integrada.</p>
+
+        <h3 style="margin-top: 20px; color: var(--primary-dark);">Parámetros de Configuración (Software)</h3>
+        <div class="grid-2">
+            <div class="sub-card">
+                <h3>Nombre de Equipo</h3>
+                <p>Para una red pequeña los parámetros son sencillos: asignar un nombre único a cada equipo junto con una descripción para reconocer cada PC en la red.</p>
+            </div>
+            <div class="sub-card">
+                <h3>Grupo de Trabajo</h3>
+                <p>Establecer el nombre del grupo de trabajo, el cual debe ser <strong>exactamente el mismo</strong> para todas las computadoras que conforman la red local.</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 25px; color: var(--primary-dark);">Elementos de Red y Dispositivos de Conectividad</h3>
+        <div class="grid-2">
+            <div class="sub-card">
+                <h3>Insumos y Componentes</h3>
+                <ul>
+                    <li>Cable UTP Cat. 5</li>
+                    <li>Fichas RJ-45 (macho / hembra)</li>
+                    <li>Capuchones de red</li>
+                    <li>Módem / Switch / Router</li>
+                </ul>
+            </div>
+            <div class="sub-card">
+                <h3>Equipos de Conectividad</h3>
+                <ul>
+                    <li>Módem USB ADSL</li>
+                    <li>Módem / Router ADSL</li>
+                    <li>Router Wi-Fi</li>
+                    <li>Interfaz de red WLAN (Inalámbrica)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Cableado Estructurado y Normas -->
+    <section class="card">
+        <span class="badge">Unidad 8</span>
+        <h2>Cable UTP y Normas de Ponchado (T568A / T568B)</h2>
+        <p>Un <strong>Cable UTP</strong> (Unshielded Twisted Pair) es un cordón resguardado por un recubrimiento plástico que permite la conducción eléctrica o distintos tipos de señales. Contiene pares trenzados sin blindaje y es clave en las telecomunicaciones.</p>
+
+        <h3 style="margin-top: 20px; color: var(--primary-dark);">Ventajas del Cableado Estructurado</h3>
+        <ul>
+            <li>Minimiza tiempo y costos, aumentando el rendimiento de los equipos.</li>
+            <li>Optimiza y permite compartir recursos ya que es administrable por el usuario.</li>
+            <li>Mejora y facilita el mantenimiento técnico de la red.</li>
+        </ul>
+
+        <h3 style="margin-top: 25px; color: var(--primary-dark);">Estándares de Colores para Conectores RJ-45</h3>
+        <p>Existen 2 tipos de normas o configuraciones a seguir para el orden de los colores de los pares al armar la ficha terminal:</p>
+
+        <div class="grid-2">
+            <!-- NORMA A -->
+            <div class="sub-card" style="background: white;">
+                <h3>Norma A (T568A)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pin</th>
+                            <th>Color del Par</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td><span class="color-dot bv"></span>Blanco / Verde</td></tr>
+                        <tr><td>2</td><td><span class="color-dot v"></span>Verde</td></tr>
+                        <tr><td>3</td><td><span class="color-dot bn"></span>Blanco / Naranja</td></tr>
+                        <tr><td>4</td><td><span class="color-dot a"></span>Azul</td></tr>
+                        <tr><td>5</td><td><span class="color-dot ba"></span>Blanco / Azul</td></tr>
+                        <tr><td>6</td><td><span class="color-dot n"></span>Naranja</td></tr>
+                        <tr><td>7</td><td><span class="color-dot bc"></span>Blanco / Café</td></tr>
+                        <tr><td>8</td><td><span class="color-dot c"></span>Café</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- NORMA B -->
+            <div class="sub-card" style="background: white;">
+                <h3>Norma B (T568B)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pin</th>
+                            <th>Color del Par</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td><span class="color-dot bn"></span>Blanco / Naranja</td></tr>
+                        <tr><td>2</td><td><span class="color-dot n"></span>Naranja</td></tr>
+                        <tr><td>3</td><td><span class="color-dot bv"></span>Blanco / Verde</td></tr>
+                        <tr><td>4</td><td><span class="color-dot a"></span>Azul</td></tr>
+                        <tr><td>5</td><td><span class="color-dot ba"></span>Blanco / Azul</td></tr>
+                        <tr><td>6</td><td><span class="color-dot v"></span>Verde</td></tr>
+                        <tr><td>7</td><td><span class="color-dot bc"></span>Blanco / Café</td></tr>
+                        <tr><td>8</td><td><span class="color-dot c"></span>Café</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Fundamentos y Arquitectura de Redes de Datos -->
+    <section class="card">
+        <span class="badge">Unidad 9</span>
+        <h2>Fundamentos de Redes de Datos y Arquitectura</h2>
+        <p>Una <strong>Red de Datos</strong> es un conjunto de equipos informáticos y dispositivos conectados entre sí mediante medios físicos o inalámbricos, con el objetivo de compartir información y recursos.</p>
+
+        <div class="grid-2">
+            <div class="sub-card">
+                <h3>Usabilidad de una Red</h3>
+                <p>Permite enviar correos, imprimir desde cualquier PC, compartir archivos y acceder a Internet de manera fluida.</p>
+            </div>
+            <div class="sub-card">
+                <h3>Ventajas Principales</h3>
+                <p>Ahorro de recursos, comunicación rápida, trabajo colaborativo y acceso centralizado a la información.</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 25px; color: var(--primary-dark);">Arquitectura de Red</h3>
+        <p>Es el diseño y la organización de los componentes de una red. Define cómo se comunican los dispositivos. Las principales tecnologías históricas y actuales fueron:</p>
+
+        <div class="grid-2">
+            <div class="sub-card">
+                <h3>ARCnet</h3>
+                <p>Una de las primeras redes para oficinas. Usaba topología de BUS y era lenta para los estándares actuales.</p>
+            </div>
+            <div class="sub-card">
+                <h3>Token Ring</h3>
+                <p>Utilizaba un "testigo" o <i>token</i> que circulaba por la red. Solo el equipo con el token podía transmitir datos.</p>
+            </div>
+        </div>
+
+        <div class="sub-card" style="margin-top: 15px; background: white;">
+            <h3>Ethernet</h3>
+            <p>Es el estándar más utilizado hoy en día. Permite altas velocidades y utiliza el protocolo <strong>CSMA/CD</strong> para evitar colisiones de datos en el medio.</p>
+        </div>
+
+        <h3 style="margin-top: 25px; color: var(--primary-dark);">Protocolos de Red</h3>
+        <p>Son las reglas que permiten que dos dispositivos se entiendan. Sin protocolos, la comunicación no sería posible. Ejemplos (todos siglas):</p>
+        <div class="grid-2">
+            <div class="sub-card">
+                <h3>TCP / IP</h3>
+                <p>Conjunto de protocolos base para la transmisión e interconexión en Internet.</p>
+            </div>
+            <div class="sub-card">
+                <h3>HTTP & FTP</h3>
+                <p><strong>HTTP:</strong> Transferencia de páginas web.<br><strong>FTP:</strong> Transferencia de archivos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Modelo OSI y Alcances de Red -->
+    <section class="card">
+        <span class="badge">Unidad 10</span>
+        <h2>Modelo OSI, Tipos de Red y Modelo Cliente/Servidor</h2>
+
+        <h3 style="color: var(--primary-dark);">El Modelo OSI</h3>
+        <p>Es un modelo teórico de <strong>7 capas</strong> que explica cómo viajan los datos desde un dispositivo a otro:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nº Capa</th>
+                    <th>Nombre de Capa</th>
+                    <th>Función Principal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>7</strong></td><td><strong>Aplicación</strong></td><td>Interfaz con las aplicaciones del usuario final.</td></tr>
+                <tr><td><strong>6</strong></td><td><strong>Presentación</strong></td><td>Formato, cifrado y traducción de los datos.</td></tr>
+                <tr><td><strong>5</strong></td><td><strong>Sesión</strong></td><td>Apertura, mantenimiento y cierre de sesiones.</td></tr>
+                <tr><td><strong>4</strong></td><td><strong>Transporte</strong></td><td>Transferencia de datos confiable entre extremos.</td></tr>
+                <tr><td><strong>3</strong></td><td><strong>Red</strong></td><td>Direccionamiento lógico y enrutamiento (ej. IP).</td></tr>
+                <tr><td><strong>2</strong></td><td><strong>Enlace de Datos</strong></td><td>Direccionamiento físico (MAC) y control de errores.</td></tr>
+                <tr><td><strong>1</strong></td><td><strong>Física</strong></td><td>Transmisión de bits a través de medios físicos.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert-box">
+            <strong>💡 Utilidad del Modelo OSI:</strong> Sirve para entender y resolver problemas de red ordenadamente capa por capa.
+        </div>
+
+        <h3 style="margin-top: 25px; color: var(--primary-dark);">Tipos de Red según su Alcance</h3>
+        <div class="grid-2">
+            <div class="sub-card">
+                <h3>PAN</h3>
+                <p>Conecta dispositivos cercanos a una persona. <strong>Ejemplo:</strong> Auricular Bluetooth conectado con el celular.</p>
+            </div>
+            <div class="sub-card">
+                <h3>LAN</h3>
+                <p>Cubre un espacio pequeño como una aula, casa u oficina.</p>
+            </div>
+            <div class="sub-card">
+                <h3>MAN</h3>
+                <p>Conecta varias LAN dentro de una misma ciudad.</p>
+            </div>
+            <div class="sub-card">
+                <h3>WAN</h3>
+                <p>Cubre grandes distancias (países, continentes). Internet es la red WAN más grande.</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 25px; color: var(--primary-dark);">Modelo Cliente / Servidor</h3>
+        <p>Es un modelo donde los <strong>clientes</strong> solicitan servicios y los <strong>servidores</strong> los proveen.</p>
+        <div class="sub-card" style="margin-top: 10px;">
+            <p><strong>Ejemplo práctico:</strong> Cuando usted abre una página web en el navegador, su PC actúa como el <strong>cliente</strong> y el servidor web le envía la página solicitada.</p>
+        </div>
+    </section>
+
+    <!-- 6. Topologías, Medios de Transmisión y Digitalización -->
+    <section class="card">
+        <span class="badge">Unidad 11</span>
+        <h2>Topologías, Medios de Transmisión y Digitalización</h2>
+
+        <h3 style="color: var(--primary-dark);">Topologías de Red</h3>
+        <p>Es la forma física o lógica en que se conectan los dispositivos:</p>
+        <div class="grid-2">
+            <div class="sub-card">
+                <h3>Bus</h3>
+                <p>Todos los equipos están conectados a un mismo cable principal.</p>
+            </div>
+            <div class="sub-card">
+                <h3>Estrella</h3>
+                <p>Todos los equipos están conectados a un dispositivo central como un Switch.</p>
+            </div>
+            <div class="sub-card">
+                <h3>Anillo</h3>
+                <p>Los equipos forman un círculo cerrado de conexión.</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 25px; color: var(--primary-dark);">Medios de Transmisión</h3>
+        <div class="grid-2">
+            <div class="sub-card">
+                <h3>Medios Guiados</h3>
+                <p>Usan un cable físico para la señal. <strong>Ejemplos:</strong> Par trenzado, cable coaxial y fibra óptica.</p>
+            </div>
+            <div class="sub-card">
+                <h3>Medios No Guiados</h3>
+                <p>Transmiten sin cables por el aire. <strong>Ejemplos:</strong> Wi-Fi, ondas de radio e infrarrojo.</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 25px; color: var(--primary-dark);">Digitalización de Señales</h3>
+        <p>Es el proceso de convertir información analógica, como la voz, en señales digitales de <code>0</code> y <code>1</code> para que la computadora pueda procesarla y transmitirla.</p>
+    </section>
+
+    <footer>
+        <p>Redes de Datos I &bull; Módulo Educativo de Informática Básica</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
